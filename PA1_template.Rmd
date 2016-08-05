@@ -10,9 +10,13 @@ data <- read.csv("activity.csv")
 ```{r}
 library(ggplot2)
 total.steps <- tapply(data$steps, data$date, FUN=sum, na.rm=TRUE)
-qplot(total.steps, binwidth=1000, xlab="total number of steps taken each day")
+plot1 <- qplot(total.steps, binwidth=1000, xlab="total number of steps taken each day")
+png(filename="./figure/plot1.png")
+plot(plot1)
+dev.off()
 mean(total.steps, na.rm=TRUE)
 median(total.steps, na.rm=TRUE)
+
 ```
 
 ## What is the average daily activity pattern?
@@ -20,10 +24,14 @@ median(total.steps, na.rm=TRUE)
 library(ggplot2)
 averages <- aggregate(x=list(steps=data$steps), by=list(interval=data$interval),
                       FUN=mean, na.rm=TRUE)
-ggplot(data=averages, aes(x=interval, y=steps)) +
-    geom_line() +
-    xlab("5-minute interval") +
-    ylab("average number of steps taken")
+plot2 <- ggplot(data=averages, aes(x=interval, y=steps)) +
+        geom_line() +
+        xlab("5-minute interval") +
+        ylab("average number of steps taken")
+
+png(filename="./figure/plot2.png")
+plot(plot2)
+dev.off()
 ```
 
 On average across all the days in the dataset, the 5-minute interval contains
@@ -62,9 +70,12 @@ Now, using the filled data set, let's make a histogram of the total number of st
 
 ```{r}
 total.steps <- tapply(filled.data$steps, filled.data$date, FUN=sum)
-qplot(total.steps, binwidth=1000, xlab="total number of steps taken each day")
+plot3 <- qplot(total.steps, binwidth=1000, xlab="total number of steps taken each day")
 mean(total.steps)
 median(total.steps)
+png(filename="./figure/plot3.png")
+plot(plot3)
+dev.off()
 ```
 
 Mean and median values are higher after imputing missing data. The reason is
@@ -96,6 +107,9 @@ Now, let's make a panel plot containing plots of average number of steps taken
 on weekdays and weekends.
 ```{r}
 averages <- aggregate(steps ~ interval + day, data=filled.data, mean)
-ggplot(averages, aes(interval, steps)) + geom_line() + facet_grid(day ~ .) +
-    xlab("5-minute interval") + ylab("Number of steps")
+plot4 <- ggplot(averages, aes(interval, steps)) + geom_line() + facet_grid(day ~ .) +
+        xlab("5-minute interval") + ylab("Number of steps")
+png(filename="./figure/plot4.png")
+plot(plot4)
+dev.off()
 ```
