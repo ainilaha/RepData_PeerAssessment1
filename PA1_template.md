@@ -27,7 +27,7 @@ What is mean total number of steps taken per day?
 hist(totalSteps$steps)
 ```
 
-![plot of chunk unnamed-chunk-3](figure/plot3.png) 
+![plot of chunk plot3](figure/plot3.png) 
 
 
 * Calculate and report the **mean** and **median** total number of steps taken 
@@ -66,7 +66,7 @@ stepsInterval <- aggregate(steps ~ interval, data = activity, mean, na.rm = TRUE
 plot(steps ~ interval, data = stepsInterval, type = "l")
 ```
 
-![plot of chunk unnamed-chunk-5](figure/plot5.png) 
+![plot of chunk plot4](figure/plot3.png) 
 
 
 * Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps? 
